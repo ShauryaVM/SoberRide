@@ -78,7 +78,7 @@ GPIO.setup(GREEN_LED_PIN, GPIO.OUT)
 
 
 person_points = age_score()+gender_score()+time_score()+day_score()
-print(f"Points: {person_points}")
+#print(f"Points: {person_points}")
 """if person_points >= 12 and person_points <= 13:
     tolerance_diff = -100
 elif person_points >= 9 and person_points <12:
@@ -110,18 +110,18 @@ try:
     #breathalyzer_chance = norm.cdf(sensor_value, threshold, stddev)
     data_chance = norm.cdf(person_points, 9, 1.33)
     if(sensor_value==0):
-        breathalyzer_chance = 0.8
+        breathalyzer_chance = 0.9
     else:
-        breathalyzer_chance = 0.2
-    final_chance = 0.5*breathalyzer_chance + 0.3*face_chance + 0.2*data_chance
-    print(f"Driver Intoxication Final Chance: {final_chance}")
+        breathalyzer_chance = 0.1
+    final_chance = 0.8*breathalyzer_chance + 0.15*face_chance + 0.05*data_chance
+    print(f"Driver Intoxication Final Chance using Multimodal Data: {final_chance}")
     #final_chance = 0.5*breathalyzer_chance + 0.5*face_chance
     if final_chance > 0.5:
-        print("Driver is drunk")
+        print("\nDriver is drunk")
         GPIO.output(RED_LED_PIN, GPIO.HIGH)
         GPIO.output(GREEN_LED_PIN, GPIO.LOW)
     else:
-        print("Driver is sober")
+        print("\nDriver is sober")
         GPIO.output(RED_LED_PIN, GPIO.LOW)
         GPIO.output(GREEN_LED_PIN, GPIO.HIGH)
     
